@@ -1,0 +1,44 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  downloadUrl: string;
+  benefits: string[];
+}
+
+const { title, description, downloadUrl, benefits } = Astro.props;
+---
+
+<div class="group relative overflow-hidden rounded-lg border bg-white shadow-sm hover:shadow-md transition-shadow">
+  <div class="p-6">
+    <div class="space-y-4">
+      <div class="space-y-2">
+        <h3 class="text-xl font-bold text-amber-900">{title}</h3>
+        <p class="text-gray-600 text-sm">{description}</p>
+      </div>
+      
+      <div class="space-y-2">
+        <p class="text-sm font-medium text-amber-800">What you'll learn:</p>
+        <ul class="space-y-1">
+          {benefits.map(benefit => (
+            <li class="text-sm text-gray-600 flex items-center">
+              <svg class="h-4 w-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              {benefit}
+            </li>
+          ))}
+        </ul>
+      </div>
+      
+      <div class="pt-4">
+        <a
+          href={downloadUrl}
+          class="w-full inline-flex h-10 items-center justify-center rounded-md bg-amber-700 px-6 text-sm font-medium text-white shadow transition-colors hover:bg-amber-800 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-amber-700"
+        >
+          Download Free Guide
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

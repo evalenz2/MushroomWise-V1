@@ -1,0 +1,170 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Mushroom Quiz - Find Your Perfect Match | MushroomWise">
+  <main class="flex-1">
+    <section class="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-amber-50 to-white">
+      <div class="container px-4 md:px-6">
+        <div class="max-w-3xl mx-auto text-center">
+          <div class="space-y-4">
+            <h1 class="text-3xl font-bold tracking-tighter sm:text-5xl text-amber-900">
+              Find Your Perfect Mushroom Match
+            </h1>
+            <p class="text-xl text-gray-600">
+              Answer 5 quick questions to discover which functional mushrooms align with your wellness goals.
+            </p>
+            <div class="inline-block rounded-lg bg-amber-100 px-4 py-2 text-sm text-amber-800 font-medium">
+              Takes less than 60 seconds
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="w-full py-12 md:py-24 lg:py-32">
+      <div class="container px-4 md:px-6">
+        <div class="max-w-2xl mx-auto">
+          <div id="quiz-container" class="space-y-8">
+            <!-- Question 1 -->
+            <div class="quiz-question active" data-question="1">
+              <div class="space-y-6">
+                <div class="text-center">
+                  <span class="text-sm text-amber-700 font-medium">Question 1 of 5</span>
+                  <div class="w-full bg-gray-200 rounded-full h-2 mt-2">
+                    <div class="bg-amber-700 h-2 rounded-full" style="width: 20%"></div>
+                  </div>
+                </div>
+                <h2 class="text-2xl font-bold text-amber-900 text-center">
+                  What's your primary wellness goal?
+                </h2>
+                <div class="grid gap-4 md:grid-cols-2">
+                  <button class="quiz-option p-6 border-2 border-gray-200 rounded-lg hover:border-amber-300 hover:bg-amber-50 transition-colors text-left" data-value="focus">
+                    <h3 class="font-semibold text-amber-900">Better Focus & Mental Clarity</h3>
+                    <p class="text-sm text-gray-600 mt-2">Improve concentration, memory, and cognitive performance</p>
+                  </button>
+                  <button class="quiz-option p-6 border-2 border-gray-200 rounded-lg hover:border-amber-300 hover:bg-amber-50 transition-colors text-left" data-value="stress">
+                    <h3 class="font-semibold text-amber-900">Stress & Sleep Support</h3>
+                    <p class="text-sm text-gray-600 mt-2">Manage stress, improve sleep quality, and feel more balanced</p>
+                  </button>
+                  <button class="quiz-option p-6 border-2 border-gray-200 rounded-lg hover:border-amber-300 hover:bg-amber-50 transition-colors text-left" data-value="energy">
+                    <h3 class="font-semibold text-amber-900">Natural Energy & Endurance</h3>
+                    <p class="text-sm text-gray-600 mt-2">Boost energy levels and physical performance naturally</p>
+                  </button>
+                  <button class="quiz-option p-6 border-2 border-gray-200 rounded-lg hover:border-amber-300 hover:bg-amber-50 transition-colors text-left" data-value="immunity">
+                    <h3 class="font-semibold text-amber-900">Immune System Support</h3>
+                    <p class="text-sm text-gray-600 mt-2">Strengthen immune function and overall resilience</p>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Results will be shown here -->
+            <div id="quiz-results" class="hidden">
+              <div class="text-center space-y-6">
+                <h2 class="text-3xl font-bold text-amber-900">Your Personalized Recommendations</h2>
+                <div id="results-content" class="space-y-6">
+                  <!-- Results will be populated by JavaScript -->
+                </div>
+                <div class="bg-amber-50 p-6 rounded-lg">
+                  <h3 class="text-xl font-bold text-amber-900 mb-4">Get Your Complete Protocol Guide</h3>
+                  <p class="text-gray-600 mb-4">
+                    Enter your email to receive a personalized dosing chart and protocol guide based on your quiz results.
+                  </p>
+                  <form class="flex flex-col gap-3 sm:flex-row max-w-md mx-auto">
+                    <input
+                      type="email"
+                      placeholder="Enter your email"
+                      required
+                      class="flex h-10 w-full rounded-md border border-amber-200 bg-background px-3 py-2 text-sm"
+                    />
+                    <button 
+                      type="submit" 
+                      class="inline-flex h-10 items-center justify-center rounded-md bg-amber-700 px-6 text-sm font-medium text-white shadow transition-colors hover:bg-amber-800"
+                    >
+                      Get My Guide
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script>
+  // Simple quiz logic - in production, this would be more sophisticated
+  const quizData = {
+    focus: {
+      mushroom: "Lion's Mane",
+      description: "Perfect for cognitive enhancement and mental clarity",
+      benefits: ["Improves focus and concentration", "Supports memory formation", "Enhances cognitive function"],
+      dosage: "500-1000mg daily with breakfast"
+    },
+    stress: {
+      mushroom: "Reishi",
+      description: "The ultimate adaptogen for stress and sleep support",
+      benefits: ["Reduces stress and anxiety", "Improves sleep quality", "Supports immune function"],
+      dosage: "1000-1500mg in the evening"
+    },
+    energy: {
+      mushroom: "Cordyceps",
+      description: "Natural energy booster without the crash",
+      benefits: ["Increases energy and endurance", "Supports athletic performance", "Improves oxygen utilization"],
+      dosage: "500-1000mg before workouts"
+    },
+    immunity: {
+      mushroom: "Turkey Tail",
+      description: "Powerful immune system modulator",
+      benefits: ["Strengthens immune function", "Rich in antioxidants", "Supports gut health"],
+      dosage: "1000-2000mg daily with meals"
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const quizOptions = document.querySelectorAll('.quiz-option');
+    const resultsSection = document.getElementById('quiz-results');
+    const resultsContent = document.getElementById('results-content');
+
+    quizOptions.forEach(option => {
+      option.addEventListener('click', function() {
+        const value = this.getAttribute('data-value');
+        showResults(value);
+      });
+    });
+
+    function showResults(goal) {
+      const result = quizData[goal];
+      
+      resultsContent.innerHTML = `
+        <div class="bg-white border border-amber-200 rounded-lg p-6">
+          <h3 class="text-2xl font-bold text-amber-900 mb-4">${result.mushroom}</h3>
+          <p class="text-gray-600 mb-4">${result.description}</p>
+          <div class="space-y-2 mb-4">
+            <h4 class="font-semibold text-amber-800">Key Benefits:</h4>
+            <ul class="space-y-1">
+              ${result.benefits.map(benefit => `
+                <li class="text-sm text-gray-600 flex items-center">
+                  <svg class="h-4 w-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  ${benefit}
+                </li>
+              `).join('')}
+            </ul>
+          </div>
+          <div class="bg-amber-50 p-4 rounded-lg">
+            <h4 class="font-semibold text-amber-800 mb-2">Recommended Dosage:</h4>
+            <p class="text-sm text-gray-600">${result.dosage}</p>
+          </div>
+        </div>
+      `;
+
+      document.querySelector('.quiz-question').style.display = 'none';
+      resultsSection.classList.remove('hidden');
+    }
+  });
+</script>
